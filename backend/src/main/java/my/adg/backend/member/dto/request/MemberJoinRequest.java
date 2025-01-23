@@ -3,17 +3,14 @@ package my.adg.backend.member.dto.request;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 import jakarta.validation.constraints.Pattern;
 import my.adg.backend.global.pattern.Patterns;
-import my.adg.backend.member.domain.Address;
+import my.adg.backend.member.domain.EmbeddedAddress;
 import my.adg.backend.member.domain.Member;
 
 @Schema(description = "회원가입 정보")
@@ -56,7 +53,7 @@ public record MemberJoinRequest(
 			.name(request.name())
 			.phoneNumber(request.phoneNumber())
 			.birthday(request.birthday())
-			.address(new Address(request.zipcode(), request.address1(), request.address2()))
+			.address(new EmbeddedAddress(request.zipcode(), request.address1(), request.address2()))
 			.build();
 	}
 }

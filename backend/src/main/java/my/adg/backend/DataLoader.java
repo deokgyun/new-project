@@ -46,10 +46,14 @@ public class DataLoader implements CommandLineRunner {
 		grade4.setDiscountRate(10);
 		Grade save = gradeRepository.save(grade4);
 
-		MemberJoinRequest request = new MemberJoinRequest("test@test.com", "xptmxm1", "테스트이름", "01012345678",
-			LocalDate.of(1988, 07, 05), "12345", "address1", "address2");
+		MemberJoinRequest request = new MemberJoinRequest("test@test.com", "xptmxm1", "첫번째", "01012345678",
+			LocalDate.of(2000, 2, 22), "12345", "서울시", "영등포");
 
 		memberService.joinMember(request);
+
+		MemberJoinRequest request2 = new MemberJoinRequest("string@test.com", "xptmxm1", "두번째", "01082749127",
+			LocalDate.of(2000, 01, 24), "12345", "서울시", "구로구");
+		memberService.joinMember(request2);
 
 	}
 }
