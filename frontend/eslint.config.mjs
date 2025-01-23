@@ -1,16 +1,35 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
-import { FlatCompat } from "@eslint/eslintrc";
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
+import globals from 'globals'
+import pluginJs from '@eslint/js'
+import tseslint from 'typescript-eslint'
+import { FlatCompat } from '@eslint/eslintrc'
+import prettierPlugin from 'eslint-plugin-prettier/recommended'
+import tailwindConfig from 'eslint-plugin-tailwindcss'
 
 const compat = new FlatCompat({
-  baseDirectory: __dirname,
-});
+    baseDirectory: import.meta.dirname,
+    recommendedConfig: pluginJs.configs.recommended,
+})
 
-const eslintConfig = [
-  ...compat.extends("next/core-web-vitals", "next/typescript"),
-];
+/** @type {import('eslint').Linter.Config[]} */
+export default [
+    { files: ['**/*.{js,mjs,cjs,ts,tsx,jsx}'] },
+    { languageOptions: { globals: globals.browser } },
+    ...tseslint.configs.recommended,
+    ...tailwindConfig.configs['flat/recommended'],
+    ...compat.config({
+        extends: ['next', 'next/core-web-vitals'],
+    }),
 
-export default eslintConfig;
+    prettierPlugin,
+
+    {
+        rules: {
+            'prettier/prettier': [
+                'error',
+                {
+                    endOfLine: 'auto',
+                },
+            ],
+        },
+    },
+]
