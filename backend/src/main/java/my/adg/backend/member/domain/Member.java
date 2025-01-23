@@ -11,6 +11,7 @@ import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -50,7 +51,7 @@ public class Member extends BaseEntity implements Serializable {
 	private String password;
 
 	@Embedded
-	private Address address;
+	private EmbeddedAddress address;
 
 	@Builder.Default
 	private LocalDateTime passwordUpdatedDate = LocalDateTime.now();
@@ -63,7 +64,7 @@ public class Member extends BaseEntity implements Serializable {
 	@Builder.Default
 	private RoleType role = RoleType.ROLE_USER;
 
-	@OneToOne
+	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "grade_id")
 	private Grade grade;
 
@@ -77,6 +78,6 @@ public class Member extends BaseEntity implements Serializable {
 	}
 
 	public void updateProfile(ProfileUpdateRequest request) {
-		this.address = new Address(request.zipcode(), request.address1(), request.address2());
+		this.address = new EmbeddedAddress(request.zipcode(), request.address1(), request.address2());
 	}
 }

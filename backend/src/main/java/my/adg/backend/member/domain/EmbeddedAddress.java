@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Embeddable
 @AllArgsConstructor
 @NoArgsConstructor
-public class Address {
+public class EmbeddedAddress {
 
 	private String zipcode;
 	private String address1;

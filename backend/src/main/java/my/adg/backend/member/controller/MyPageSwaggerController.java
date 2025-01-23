@@ -10,7 +10,7 @@ import my.adg.backend.member.dto.request.ProfileUpdateRequest;
 import my.adg.backend.member.dto.request.UpdatePasswordRequest;
 import my.adg.backend.member.dto.response.MemberFindResponse;
 
-@Tag(name = "MyPage", description = "MyPage API")
+@Tag(name = "Member")
 public interface MyPageSwaggerController {
 
 	@Operation(summary = "나의 프로필 정보 조회")
