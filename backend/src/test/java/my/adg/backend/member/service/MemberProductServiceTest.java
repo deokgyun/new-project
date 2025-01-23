@@ -11,7 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import my.adg.backend.member.domain.Member;
 
-class MemberServiceTest {
+class MemberProductServiceTest {
 
 	@Autowired
 	private MemberService memberService;
