@@ -12,6 +12,8 @@ import my.adg.backend.member.dto.request.MemberJoinRequest;
 import my.adg.backend.member.repository.GradeRepository;
 import my.adg.backend.member.repository.MemberRepository;
 import my.adg.backend.member.service.MemberService;
+import my.adg.backend.product.domain.Product;
+import my.adg.backend.product.repository.ProductRepository;
 
 @Slf4j
 @Component
@@ -20,6 +22,7 @@ public class DataLoader implements CommandLineRunner {
 
 	private final MemberRepository memberRepository;
 	private final GradeRepository gradeRepository;
+	private final ProductRepository productRepository;
 
 	private final MemberService memberService;
 
@@ -54,6 +57,13 @@ public class DataLoader implements CommandLineRunner {
 		MemberJoinRequest request2 = new MemberJoinRequest("string@test.com", "xptmxm1", "두번째", "01082749127",
 			LocalDate.of(2000, 01, 24), "12345", "서울시", "구로구");
 		memberService.joinMember(request2);
+
+		Product p = new Product();
+		p.setName("test 상품");
+		p.setPrice(50000);
+		p.setDescription("상품내용이요");
+		p.setStock(500);
+		productRepository.save(p);
 
 	}
 }

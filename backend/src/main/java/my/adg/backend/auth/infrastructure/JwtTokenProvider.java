@@ -12,10 +12,12 @@ import org.springframework.stereotype.Component;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import my.adg.backend.auth.dto.response.TokenResponse;
 import my.adg.backend.global.exception.BalanceTalkException;
 import my.adg.backend.global.exception.ErrorCode;
 
+@Slf4j
 @Component
 public class JwtTokenProvider {
 

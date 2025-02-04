@@ -27,7 +27,7 @@ public enum ErrorCode {
 	INVALID_REPORT_TYPE(BAD_REQUEST, "신고 타입이 올바르지 않습니다."),
 	CANNOT_BOOKMARK_MY_RESOURCE(BAD_REQUEST, "본인이 생성한 자원에는 북마크가 불가능합니다."),
 	ALREADY_BOOKMARKED(BAD_REQUEST, "이미 북마크한 게시글입니다."),
-	ALREADY_DELETED_BOOKMARK(BAD_REQUEST, "이미 북마크가 취소된 상태입니다."),
+	ALREADY_CANCEL_ORDER(BAD_REQUEST, "이미 취소된 주문입니다."),
 	SORT_REQUIRED(BAD_REQUEST, "정렬 조건은 필수입니다."),
 	BALANCE_GAME_SIZE_TEN(BAD_REQUEST, "밸런스 게임의 갯수는 10개여야 합니다."),
 	BALANCE_GAME_SEARCH_BLANK(BAD_REQUEST, "검색어는 공백이어선 안 됩니다."),
@@ -61,7 +61,7 @@ public enum ErrorCode {
 	NOT_FOUND_MEMBER(NOT_FOUND, "존재하지 않는 회원입니다."),
 	NOT_FOUND_ADDRESS(NOT_FOUND, "존재하지 않는 주소입니다."),
 	NOT_FOUND_VOTE(NOT_FOUND, "해당 게시글에서 투표한 기록이 존재하지 않습니다."),
-	NOT_FOUND_OPTION_VOTE(NOT_FOUND, "해당 선택지에 투표한 기록이 존재하지 않습니다"),
+	NOT_FOUND_ORDER(NOT_FOUND, "해당 주문은 존재하지 않습니다."),
 	NOT_FOUND_BOOKMARK(NOT_FOUND, "해당 게시글에서 북마크한 기록이 존재하지 않습니다."),
 	NOT_FOUND_COMMENT(NOT_FOUND, "존재하지 않는 댓글입니다."),
 	NOT_FOUND_FILE(NOT_FOUND, "존재하지 않는 파일입니다."),
@@ -74,7 +74,7 @@ public enum ErrorCode {
 	NOT_FOUND_BALANCE_GAME_THAT_GAME_SET(NOT_FOUND, "해당 밸런스 게임 세트에 존재하지 않는 밸런스 게임입니다."),
 	NOT_FOUND_MAIN_TAG(NOT_FOUND, "존재하지 않는 메인 태그입니다."),
 	NOT_FOUND_TALK_PICK_THAT_MEMBER(NOT_FOUND, "해당 회원이 작성하지 않은 톡픽입니다."),
-	NOT_FOUND_TEMP_TALK_PICK(NOT_FOUND, "임시 저장한 톡픽이 존재하지 않습니다."),
+	NOT_FOUND_PRODUCT(NOT_FOUND, "존재하지 않는 상품입니다."),
 	NOT_FOUND_NOTIFICATION(NOT_FOUND, "존재하지 않는 알림입니다."),
 	NOT_FOUND_GAME_OPTION(NOT_FOUND, "게임 선택지가 존재하지 않습니다."),
 	NOT_FOUND_CACHE_VALUE(NOT_FOUND, "캐시 값이 존재하지 않습니다."),
@@ -97,7 +97,10 @@ public enum ErrorCode {
 	FAIL_SERIALIZE_NOTIFICATION_HISTORY(INTERNAL_SERVER_ERROR, "알림 내역 직렬화에 실패했습니다."),
 	FAIL_SORT(INTERNAL_SERVER_ERROR, "정렬에 실패했습니다."),
 	TALK_PICK_SUMMARY_SIZE_IS_OVER(INTERNAL_SERVER_ERROR, "요약 내용의 길이가 적정 기준을 초과했습니다."),
-	TALK_PICK_SUMMARY_FAILED(INTERNAL_SERVER_ERROR, "톡픽 요약에 실패했습니다.");
+	TALK_PICK_SUMMARY_FAILED(INTERNAL_SERVER_ERROR, "톡픽 요약에 실패했습니다."),
+	OUT_OF_STOCK(INTERNAL_SERVER_ERROR, "상품의 재고가 부족합니다."),
+
+	;
 
 	private final HttpStatus httpStatus;
 	private final String message;

@@ -4,11 +4,13 @@ import org.springframework.core.MethodParameter;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.support.WebDataBinderFactory;
 import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import my.adg.backend.auth.infrastructure.JwtTokenProvider;
 import my.adg.backend.global.exception.BalanceTalkException;
@@ -36,9 +38,18 @@ public class ArgumentResolver implements HandlerMethodArgumentResolver {
 
 		String authorization = webRequest.getHeader("Authorization");
 
-		Long id = Long.parseLong(jwtTokenProvider.decodeAccessToken(authorization));
+		String token = parseJwt(authorization);
+
+		Long id = Long.parseLong(jwtTokenProvider.decodeAccessToken(token));
 
 		return new LoginMember(id);
+	}
+
+	private String parseJwt(String request) {
+		if (StringUtils.hasText(request) && request.startsWith("Bearer ")) {
+			return request.substring(7, request.length());
+		}
+		return request;
 	}
 
 }
