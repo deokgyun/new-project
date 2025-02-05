@@ -70,7 +70,7 @@ public enum ErrorCode {
 	NOT_LIKED_COMMENT(NOT_FOUND, "해당 댓글을 좋아요한 기록이 존재하지 않습니다."),
 	NOT_FOUND_LIKE(NOT_FOUND, "해당 좋아요가 존재하지 않습니다."),
 	NOT_FOUND_BALANCE_GAME_SET(NOT_FOUND, "존재하지 않는 밸런스 게임 세트 입니다."),
-	NOT_FOUND_BALANCE_GAME(NOT_FOUND, "존재하지 않는 밸런스 게임입니다."),
+	NOT_FOUND_CART(NOT_FOUND, "존재하지 않는 장바구니 상품입니다."),
 	NOT_FOUND_BALANCE_GAME_THAT_GAME_SET(NOT_FOUND, "해당 밸런스 게임 세트에 존재하지 않는 밸런스 게임입니다."),
 	NOT_FOUND_MAIN_TAG(NOT_FOUND, "존재하지 않는 메인 태그입니다."),
 	NOT_FOUND_TALK_PICK_THAT_MEMBER(NOT_FOUND, "해당 회원이 작성하지 않은 톡픽입니다."),
