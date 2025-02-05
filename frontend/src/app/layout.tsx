@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
-import Header from '@/components/header'
+import Header from '@/components/layout/header'
 import React from 'react'
 
 const geistSans = Geist({
@@ -29,7 +29,7 @@ export default function RootLayout({
             <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
                 <div className="max-w-screen-xl mx-auto px-4">
                     <Header />
-                    <main className="pt-2.5">{children}</main>
+                    <main className="text-3xl">{children}</main>
                 </div>
             </body>
         </html>
