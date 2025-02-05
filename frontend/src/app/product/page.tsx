@@ -1,12 +1,10 @@
-import './globals.css'
-
-export default function Home() {
+export default function Page() {
     return (
         <main className="w-full">
             <div>
                 <b>할인 상품</b>
             </div>
-            <div className="mt-24">
+            <div>
                 <b>인기 상품</b>
             </div>
             <div className="mt-24">
