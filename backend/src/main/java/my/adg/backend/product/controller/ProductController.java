@@ -9,6 +9,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -16,8 +17,8 @@ import org.springframework.web.bind.annotation.RestController;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import my.adg.backend.global.dto.request.PageDataRequest;
-import my.adg.backend.product.domain.Product;
-import my.adg.backend.product.dto.response.ProductResponse;
+import my.adg.backend.product.dto.response.ProductAllResponse;
+import my.adg.backend.product.dto.response.ProductGetResponse;
 import my.adg.backend.product.repository.ProductRepository;
 import my.adg.backend.product.service.ProductService;
 
@@ -33,7 +34,7 @@ public class ProductController implements ProductSwaggerController {
 	private static final int PAGE_SIZE = 10;
 
 	@GetMapping
-	public ResponseEntity<PagedModel<ProductResponse>> getProducts(
+	public ResponseEntity<PagedModel<ProductAllResponse>> getProducts(
 		@RequestBody(required = false) Optional<PageDataRequest> request) {
 
 		int restPage = request
@@ -42,8 +43,14 @@ public class ProductController implements ProductSwaggerController {
 			.orElse(0);
 
 		Pageable pageable = PageRequest.of(restPage, PAGE_SIZE, Sort.by(Sort.Direction.DESC, SORT_ORDER_DATE));
-		Page<ProductResponse> products = productService.getProducts(pageable);
+		Page<ProductAllResponse> products = productService.getProducts(pageable);
 
 		return ResponseEntity.ok(new PagedModel<>(products));
+	}
+
+	@GetMapping("/{productId}")
+	public ResponseEntity<ProductGetResponse> getProduct(@PathVariable("productId") Long productId) {
+
+		return ResponseEntity.ok(productService.getProduct(productId));
 	}
 }

@@ -11,7 +11,7 @@ import my.adg.backend.auth.resolver.LoginMember;
 import my.adg.backend.address.domain.Address;
 import my.adg.backend.address.dto.request.CreateAndUpdateAddressRequest;
 import my.adg.backend.address.dto.response.AddressResponse;
-import my.adg.backend.address.repository.DeliveryRepository;
+import my.adg.backend.address.repository.AddressRepository;
 import my.adg.backend.global.exception.BalanceTalkException;
 import my.adg.backend.global.exception.ErrorCode;
 import my.adg.backend.member.domain.Member;
@@ -21,18 +21,18 @@ import my.adg.backend.member.service.MemberService;
 @Service
 @RequiredArgsConstructor
 @Transactional(readOnly = true)
-public class DeliveryService {
+public class AddressService {
 
-	private final DeliveryRepository deliveryRepository;
+	private final AddressRepository addressRepository;
 	private final MemberService memberService;
 
 	public List<Address> getAllDeliveryAddress(Long memberId) {
-		return deliveryRepository.findByMemberId(memberId)
+		return addressRepository.findByMemberId(memberId)
 			.orElseThrow(() -> new BalanceTalkException(ErrorCode.NOT_FOUND_ADDRESS));
 	}
 
 	public Address getDeliveryAddress(Long addressId) {
-		return deliveryRepository.findById(addressId)
+		return addressRepository.findById(addressId)
 			.orElseThrow(() -> new BalanceTalkException(ErrorCode.NOT_FOUND_ADDRESS));
 	}
 
@@ -50,7 +50,7 @@ public class DeliveryService {
 	public void createAddress(LoginMember loginMember, CreateAndUpdateAddressRequest request) {
 		Member member = memberService.getMemberById(loginMember.id());
 		Address entity = request.toEntity(member, request);
-		deliveryRepository.save(entity);
+		addressRepository.save(entity);
 	}
 
 	@Transactional
@@ -67,6 +67,6 @@ public class DeliveryService {
 	@Transactional
 	public void deleteAddress(Long id) {
 		Address deliveryAddress = getDeliveryAddress(id);
-		deliveryRepository.deleteById(deliveryAddress.getId());
+		addressRepository.deleteById(deliveryAddress.getId());
 	}
 }

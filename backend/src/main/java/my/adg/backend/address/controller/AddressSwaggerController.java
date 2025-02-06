@@ -11,7 +11,7 @@ import my.adg.backend.address.dto.request.CreateAndUpdateAddressRequest;
 import my.adg.backend.address.dto.response.AddressResponse;
 
 @Tag(name = "배송지", description = "배송지 API")
-public interface DeliverySwaggerController {
+public interface AddressSwaggerController {
 
 	@Operation(summary = "배송지 전체 조회")
 	public ResponseEntity<List<AddressResponse>> getAllDeliveryAddress(LoginMember loginMember);
