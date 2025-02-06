@@ -1,14 +1,16 @@
-export default function Page() {
+import ProductList from '@/components/product/product-list'
+import { api } from '@/utils/api'
+
+export default async function Page() {
+    const res = await api.get('/product')
+
+    const content = res.content
+
     return (
         <main className="w-full">
             <div>
-                <b>할인 상품</b>
-            </div>
-            <div>
-                <b>인기 상품</b>
-            </div>
-            <div className="mt-24">
-                <b>평점 높은 상품</b>
+                <b>상품</b>
+                <ProductList products={content} />
             </div>
         </main>
     )

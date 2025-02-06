@@ -1,5 +1,5 @@
 // TODO : 나중에 환경설정으로 환경에 따른 url 변경
-const BASE_URL: string = 'http://localhost:8080'
+const BASE_URL: string = `${process.env.NEXT_PUBLIC_API_URL}`
 
 interface FetchOptions extends RequestInit {
     headers?: HeadersInit
@@ -8,6 +8,7 @@ interface FetchOptions extends RequestInit {
 
 const defaultHeaders = {
     'Content-Type': 'application/json',
+    Authorization: `${process.env.NEXT_PUBLIC_TOKEN}`,
 }
 
 async function fetchWithDefaults(endpoint: string, options: FetchOptions = {}) {
@@ -21,8 +22,6 @@ async function fetchWithDefaults(endpoint: string, options: FetchOptions = {}) {
         },
         ...restOptions,
     })
-
-    console.log(restOptions)
 
     if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`)

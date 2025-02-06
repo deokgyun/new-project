@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,17 +43,19 @@ public class OrderController implements OrderSwaggerController {
 	}
 
 	@GetMapping
-	public ResponseEntity<Page<OrderFindResponse>> getAllOrders(
+	public ResponseEntity<PagedModel<OrderFindResponse>> getAllOrders(
 		@RequestBody(required = false) Optional<PageDataRequest> request,
 		@AuthMember LoginMember loginMember) {
 
-		int restPage = request.map(PageDataRequest::page)
+		int restPage = request
+			.map(PageDataRequest::page)
 			.map(page -> page.orElse(1) - 1)
 			.orElse(0);
 
 		Pageable pageable = PageRequest.of(restPage, PAGE_SIZE, Sort.by(Sort.Direction.DESC, SORT_ORDER_DATE));
+		Page<OrderFindResponse> orders = orderService.getAllOrders(loginMember, pageable);
 
-		return ResponseEntity.ok(orderService.getAllOrders(loginMember, pageable));
+		return ResponseEntity.ok(new PagedModel<>(orders));
 	}
 
 	@GetMapping("/{orderId}")
