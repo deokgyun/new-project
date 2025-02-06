@@ -8,7 +8,6 @@ import my.adg.backend.order.domain.OrderProduct;
 import my.adg.backend.order.domain.enums.OrderStatus;
 
 public record OrderItemResponse(
-
 	Long productId,
 	String productName,
 	OrderStatus orderStatus,

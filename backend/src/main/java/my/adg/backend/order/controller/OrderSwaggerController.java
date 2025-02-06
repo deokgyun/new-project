@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -28,7 +29,7 @@ public interface OrderSwaggerController {
 
 	// 전체 주문 조회
 	@Operation(summary = "전체 주문 조회하기")
-	ResponseEntity<Page<OrderFindResponse>> getAllOrders(Optional<PageDataRequest> request, LoginMember loginMember);
+	ResponseEntity<PagedModel<OrderFindResponse>> getAllOrders(Optional<PageDataRequest> request, LoginMember loginMember);
 
 	// 선택 주문 조회
 	@Operation(summary = "선택 주문 상세 조회하기")

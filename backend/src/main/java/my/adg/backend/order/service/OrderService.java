@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,14 +63,9 @@ public class OrderService {
 		// 주문자 찾기
 		Member member = memberService.getMemberById(loginMember.id());
 
-		// 주문내역 전체 조회, 페이징 처리
-		List<Order> orders = orderRepository.findAllByMember(member, pageable);
-		int total = orders.size();
+		Page<Order> orders = orderRepository.findAllByMember(member, pageable);
 
-		// 주문내역 dto 변환
-		List<OrderFindResponse> responses = new ArrayList<>();
-
-		for (Order order : orders) {
+		Page<OrderFindResponse> result = orders.map(order -> {
 			OrderFindResponse orderFindResponse = new OrderFindResponse(order);
 			List<OrderProduct> orderProducts = order.getOrderProducts();
 
@@ -80,10 +74,10 @@ public class OrderService {
 				orderFindResponse.addOrderProduct(orderItemResponse);
 			}
 
-			responses.add(orderFindResponse);
-		}
+			return orderFindResponse;
+		});
 
-		return new PageImpl<>(responses, pageable, total);
+		return result;
 	}
 
 	public OrderItemsResponse getOrderDetail(Long orderId, LoginMember loginMember) {
@@ -115,8 +109,8 @@ public class OrderService {
 			.orElseThrow(() -> new BalanceTalkException(ErrorCode.NOT_FOUND_ORDER));
 
 		order.getOrderProducts()
-				.forEach(orderProduct -> {
-					order.cancelOrder(orderProduct);
-				});
+			.forEach(orderProduct -> {
+				order.cancelOrder(orderProduct);
+			});
 	}
 }
