@@ -11,7 +11,9 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 import my.adg.backend.global.BaseEntity;
 import my.adg.backend.product.domain.enums.DeliveryMethod;
 import my.adg.backend.product.domain.enums.PriceType;
@@ -20,17 +22,25 @@ import my.adg.backend.product.domain.enums.PriceType;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+@Getter
+
+@Setter
 public class Delivery extends BaseEntity implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "delivery_id")
 	private Long id;
+
 	private boolean isUse;
+
 	private String company;
+
 	private int price;
+
 	@Enumerated(EnumType.STRING)
 	private DeliveryMethod method;
+
 	@Enumerated(EnumType.STRING)
 	private PriceType priceType;
 

@@ -18,25 +18,25 @@ import my.adg.backend.auth.resolver.AuthMember;
 import my.adg.backend.auth.resolver.LoginMember;
 import my.adg.backend.address.dto.request.CreateAndUpdateAddressRequest;
 import my.adg.backend.address.dto.response.AddressResponse;
-import my.adg.backend.address.service.DeliveryService;
+import my.adg.backend.address.service.AddressService;
 
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/address")
-public class DeliveryController implements DeliverySwaggerController {
+public class AddressController implements AddressSwaggerController {
 
-	private final DeliveryService deliveryService;
+	private final AddressService addressService;
 
 	@GetMapping
 	public ResponseEntity<List<AddressResponse>> getAllDeliveryAddress(@AuthMember LoginMember loginMember) {
-		return ResponseEntity.ok().body(deliveryService.getAllDeliveryAddress(loginMember));
+		return ResponseEntity.ok().body(addressService.getAllDeliveryAddress(loginMember));
 	}
 
 	@PostMapping
 	public ResponseEntity<Void> createAddress(@AuthMember LoginMember loginMember,
 		@RequestBody @Valid CreateAndUpdateAddressRequest request) {
 
-		deliveryService.createAddress(loginMember, request);
+		addressService.createAddress(loginMember, request);
 
 		return ResponseEntity.ok().build();
 	}
@@ -45,7 +45,7 @@ public class DeliveryController implements DeliverySwaggerController {
 	public ResponseEntity<Void> updateAddress(@PathVariable(name = "id") Long id, @AuthMember LoginMember loginMember,
 		@RequestBody CreateAndUpdateAddressRequest request) {
 
-		deliveryService.updateAddress(id, request);
+		addressService.updateAddress(id, request);
 		return ResponseEntity.ok().build();
 	}
 
@@ -53,13 +53,13 @@ public class DeliveryController implements DeliverySwaggerController {
 	public ResponseEntity<AddressResponse> getAddress(@PathVariable(name = "id") Long id,
 		@AuthMember LoginMember loginMember) {
 
-		return ResponseEntity.ok(deliveryService.getAddress(id));
+		return ResponseEntity.ok(addressService.getAddress(id));
 	}
 
 	@DeleteMapping("/{id}")
 	public ResponseEntity<Void> deleteAddress(@PathVariable(name = "id") Long id, @AuthMember LoginMember loginMember) {
 
-		deliveryService.deleteAddress(id);
+		addressService.deleteAddress(id);
 		return ResponseEntity.ok().build();
 	}
 }

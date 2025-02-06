@@ -12,7 +12,11 @@ import my.adg.backend.member.dto.request.MemberJoinRequest;
 import my.adg.backend.member.repository.GradeRepository;
 import my.adg.backend.member.repository.MemberRepository;
 import my.adg.backend.member.service.MemberService;
+import my.adg.backend.product.domain.Delivery;
 import my.adg.backend.product.domain.Product;
+import my.adg.backend.product.domain.enums.DeliveryMethod;
+import my.adg.backend.product.domain.enums.PriceType;
+import my.adg.backend.product.repository.DeliveryRepository;
 import my.adg.backend.product.repository.ProductRepository;
 
 @Slf4j
@@ -23,6 +27,7 @@ public class DataLoader implements CommandLineRunner {
 	private final MemberRepository memberRepository;
 	private final GradeRepository gradeRepository;
 	private final ProductRepository productRepository;
+	private final DeliveryRepository deliveryRepository;
 
 	private final MemberService memberService;
 
@@ -58,19 +63,32 @@ public class DataLoader implements CommandLineRunner {
 			LocalDate.of(2000, 01, 24), "12345", "서울시", "구로구");
 		memberService.joinMember(request2);
 
-		Product p = new Product();
-		p.setName("test 상품");
-		p.setPrice(50000);
-		p.setDescription("상품내용이요");
-		p.setStock(500);
-		productRepository.save(p);
+		for (int i = 0; i < 17; i++) {
+			int min = 1;
+			int deliveryMax = 10;
+			double v = Math.floor(Math.random() * (deliveryMax - min + 1)) + min;
 
-		Product p2 = new Product();
-		p2.setName("2번상품 상품");
-		p2.setPrice(20000);
-		p2.setDescription("상품내용이요");
-		p2.setStock(300);
-		productRepository.save(p2);
+			double deliveryPrice = v * 1000;
+			double price = v * 10000;
+
+			Delivery delivery = new Delivery();
+			delivery.setUse(true);
+			delivery.setCompany("우리택배");
+			delivery.setPrice((int)deliveryPrice);
+			delivery.setMethod(DeliveryMethod.PARCEL);
+			delivery.setPriceType(PriceType.PAID);
+			Delivery save1 = deliveryRepository.save(delivery);
+
+			Product p = new Product();
+			p.setName(i + "번 상품");
+			p.setPrice((int)price);
+			p.setDescription("상품내용입니다.");
+			p.setStock((int)(Math.random() * 100 + 300));
+			p.setDelivery(save1);
+
+			productRepository.save(p);
+
+		}
 
 	}
 }
