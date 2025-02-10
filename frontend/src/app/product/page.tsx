@@ -1,16 +1,24 @@
 import ProductList from '@/components/product/product-list'
 import { api } from '@/utils/api'
 
-export default async function Page() {
+interface PageProps {
+    pageNumber: number
+    size: number
+    totalElements: number
+    totalPages: number
+}
+
+export default async function Page({ params }: any) {
     const res = await api.get('/product')
 
     const content = res.content
+    const page: PageProps = res.page
 
     return (
         <main className="w-full">
             <div>
                 <b>상품</b>
-                <ProductList products={content} />
+                <ProductList initialProducts={content} page={page} />
             </div>
         </main>
     )

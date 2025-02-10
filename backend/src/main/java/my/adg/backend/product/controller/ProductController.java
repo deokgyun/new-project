@@ -10,13 +10,12 @@ import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import my.adg.backend.global.dto.request.PageDataRequest;
 import my.adg.backend.product.dto.response.ProductAllResponse;
 import my.adg.backend.product.dto.response.ProductGetResponse;
 import my.adg.backend.product.repository.ProductRepository;
@@ -35,14 +34,12 @@ public class ProductController implements ProductSwaggerController {
 
 	@GetMapping
 	public ResponseEntity<PagedModel<ProductAllResponse>> getProducts(
-		@RequestBody(required = false) Optional<PageDataRequest> request) {
+		@RequestParam(value = "page", defaultValue = "0") int page) {
 
-		int restPage = request
-			.map(PageDataRequest::page)
-			.map(page -> page.orElse(1) - 1)
-			.orElse(0);
+		log.info("page: {}", page);
 
-		Pageable pageable = PageRequest.of(restPage, PAGE_SIZE, Sort.by(Sort.Direction.DESC, SORT_ORDER_DATE));
+
+		Pageable pageable = PageRequest.of(page, PAGE_SIZE, Sort.by(Sort.Direction.DESC, SORT_ORDER_DATE));
 		Page<ProductAllResponse> products = productService.getProducts(pageable);
 
 		return ResponseEntity.ok(new PagedModel<>(products));
