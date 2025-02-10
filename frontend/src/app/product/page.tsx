@@ -8,8 +8,8 @@ interface PageProps {
     totalPages: number
 }
 
-export default async function Page({ params }: any) {
-    const res = await api.get('/product')
+export default async function Page() {
+    const res = await api.get('/api/product')
 
     const content = res.content
     const page: PageProps = res.page

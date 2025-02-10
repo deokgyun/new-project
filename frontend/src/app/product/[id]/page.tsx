@@ -4,7 +4,7 @@ import { Button } from '@ui'
 export default async function GetProduct({ params }: any): Promise<any> {
     const { id } = await params
 
-    const data: Product = await api.get(`/product/${id}`)
+    const data: Product = await api.get(`/api/product/${id}`)
 
     return (
         <div className="text-xl">

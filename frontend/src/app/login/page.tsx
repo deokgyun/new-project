@@ -1,13 +1,16 @@
 'use client'
 
 import { Button, Card, Checkbox, Input, Label, Switch } from '@ui'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { api } from '@/utils/api'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const router = useRouter()
 
     const handleLogin = async (e) => {
         e.preventDefault()
@@ -18,14 +21,25 @@ export default function LoginPage() {
         }
 
         try {
-            const response = await api.post('/login', { data })
+            const response = await api.post('/login', {
+                email: data.email,
+                password: data.password,
+            })
 
-            localStorage.setItem('access', 'Bearer ' + response.body.access)
-            localStorage.setItem('refresh', 'Bearer ' + response.body.refresh)
+            localStorage.setItem('access', response.body.access)
+            localStorage.setItem('refresh', response.body.refresh)
+            setIsLoggedIn(true)
         } catch (e) {
             console.error(e)
         }
     }
+
+    useEffect(() => {
+        if (isLoggedIn) {
+            const previousPage: string = window.sessionStorage.getItem('prev')
+            router.push(previousPage)
+        }
+    }, [isLoggedIn, router])
 
     return (
         <main className="flex justify-center items-center mt-24">

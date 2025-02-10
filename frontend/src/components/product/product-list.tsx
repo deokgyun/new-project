@@ -37,7 +37,7 @@ export default function ProductList({ initialProducts, page }: Props) {
 
     const loadPage = async (pageNumber: number) => {
         const restPage = pageNumber - 1
-        const res = await api.get(`/product?page=${restPage}&q=`)
+        const res = await api.get(`/api/product?page=${restPage}&q=`)
         const content = res.content
 
         setProducts(content)
