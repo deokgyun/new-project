@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google'
 import './globals.css'
 import Header from '@/components/layout/header'
 import React from 'react'
+import RouteChangeObserver from '@/hooks/RouterObserver'
 
 const geistSans = Geist({
     variable: '--font-geist-sans',
@@ -31,6 +32,7 @@ export default function RootLayout({
                     <Header />
                     <main className="text-3xl">{children}</main>
                 </div>
+                <RouteChangeObserver />
             </body>
         </html>
     )
