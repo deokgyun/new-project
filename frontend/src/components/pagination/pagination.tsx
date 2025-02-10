@@ -1,39 +1,29 @@
-import {
-    Pagination,
-    PaginationContent,
-    PaginationEllipsis,
-    PaginationItem,
-    PaginationLink,
-    PaginationNext,
-    PaginationPrevious,
-} from '../ui/pagination'
+import { Pagination, PaginationContent, PaginationItem, PaginationLink } from '../ui/pagination'
+
+const BASE_URL: string = `${process.env.NEXT_PUBLIC_API_URL}`
 
 interface PageProps {
     pageNumber: number
     size: number
-    isFirstPage: boolean
-    isLastPage: boolean
     totalElements: number
     totalPages: number
 }
 
-export default function Paging({ pageProps }: { pageProps: PageProps }) {
+export default function Paging({ page, ...props }: { page: PageProps }) {
+    const pages = []
+
+    for (let i = 1; i <= page.totalPages; i++) {
+        pages.push(
+            <PaginationItem>
+                <PaginationLink key={i} href={`${BASE_URL}/product?page=${i - 1}`}>
+                    {i}
+                </PaginationLink>
+            </PaginationItem>,
+        )
+    }
     return (
         <Pagination>
-            <PaginationContent>
-                <PaginationItem>
-                    <PaginationPrevious href="#" />
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationLink href="#">1</PaginationLink>
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationEllipsis />
-                </PaginationItem>
-                <PaginationItem>
-                    <PaginationNext href="#" />
-                </PaginationItem>
-            </PaginationContent>
+            <PaginationContent>{pages}</PaginationContent>
         </Pagination>
     )
 }
