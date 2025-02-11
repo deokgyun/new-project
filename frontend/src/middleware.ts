@@ -1,9 +1,11 @@
 import { type NextRequest, NextResponse } from 'next/server'
 
-export default function middleware(request: NextRequest) {
-    console.log('middle === ' + request)
+export function middleware(request: NextRequest) {
+    // if (!access || !refresh) {
+    //     return NextResponse.redirect(new URL('/login', request.url))
+    // }
 }
 
 export const config = {
-    matcher: ['/signup', '/product/:path*'],
+    matcher: ['/((?!api|_next/static|_next/image|favicon.ico|fonts|images).*)'],
 }
