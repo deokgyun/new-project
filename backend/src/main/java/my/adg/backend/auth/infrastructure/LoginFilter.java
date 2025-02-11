@@ -37,7 +37,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 	public Authentication attemptAuthentication(HttpServletRequest request,
 		HttpServletResponse response) throws AuthenticationException {
 
-		log.info("여기");
 		LoginRequest loginRequest;
 
 		try {

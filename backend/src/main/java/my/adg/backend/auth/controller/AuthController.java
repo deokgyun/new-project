@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RestController;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import my.adg.backend.auth.dto.request.LoginRequest;
+import my.adg.backend.auth.dto.request.TokenReissueRequest;
 import my.adg.backend.auth.dto.response.LoginResponse;
 import my.adg.backend.auth.service.LoginService;
 import my.adg.backend.member.dto.request.MemberJoinRequest;
@@ -31,5 +32,10 @@ public class AuthController implements AuthSwaggerController {
 	@PostMapping("/signup")
 	public ResponseEntity<MemberFindResponse> joinMember(@RequestBody @Valid MemberJoinRequest request) {
 		return ResponseEntity.ok(memberService.joinMember(request));
+	}
+
+	@PostMapping("/reissue")
+	public ResponseEntity<LoginResponse> reissueToken(@Valid @RequestBody TokenReissueRequest request) {
+		return ResponseEntity.ok(loginService.reissueToken(request));
 	}
 }
