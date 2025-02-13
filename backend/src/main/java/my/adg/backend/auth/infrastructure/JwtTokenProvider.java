@@ -31,7 +31,8 @@ public class JwtTokenProvider {
 	private final long refreshExpiration;
 
 	public JwtTokenProvider(
-		CustomUserDetailsService userDetailsService, @Value("${security.jwt.token.secret-key}") String accessSecretKey,
+		CustomUserDetailsService userDetailsService,
+		@Value("${security.jwt.token.secret-key}") String accessSecretKey,
 		@Value("${security.jwt.refresh.secret-key}") String refreshSecretKey,
 		@Value("${security.jwt.token.expire-length}") long accessExpiration,
 		@Value("${security.jwt.refresh.expire-length}") long refreshExpiration) {
@@ -50,7 +51,7 @@ public class JwtTokenProvider {
 	}
 
 	public Authentication getAuthentication(String token) {
-		UserDetails userDetails = userDetailsService.loadUserByUsername(decodeAccessToken(token));
+		UserDetails userDetails = userDetailsService.loadUserById(Long.valueOf(decodeAccessToken(token)));
 		return new UsernamePasswordAuthenticationToken(userDetails, userDetails.getPassword(),
 			userDetails.getAuthorities());
 	}
