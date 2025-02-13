@@ -47,10 +47,8 @@ public class SecurityConfig {
 		http.authorizeHttpRequests((auth) -> auth
 			.requestMatchers("/swagger", "/swagger-ui.html", "/swagger-ui/**",
 				"/api-docs ", "/api-docs/**", "/v3/api-docs/**").permitAll()
-
-			.requestMatchers("/api/login", "/api/signup").permitAll()
-
-			.anyRequest().permitAll());
+			.requestMatchers("/api/login", "/api/signup", "/login").permitAll()
+			.anyRequest().authenticated());
 
 		http.csrf(AbstractHttpConfigurer::disable);
 
@@ -58,10 +56,12 @@ public class SecurityConfig {
 
 		http.httpBasic(AbstractHttpConfigurer::disable);
 
-		http.addFilterBefore(new JwtFilter(jwtTokenProvider), LoginFilter.class);
+		http
+			.addFilterBefore(new JwtFilter(jwtTokenProvider), LoginFilter.class);
 
-		http.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtTokenProvider),
-			UsernamePasswordAuthenticationFilter.class);
+		http
+			.addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtTokenProvider),
+				UsernamePasswordAuthenticationFilter.class);
 
 		http.sessionManagement(
 			(session) -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
