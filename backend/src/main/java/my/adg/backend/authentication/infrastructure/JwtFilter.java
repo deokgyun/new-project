@@ -26,7 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
 	private final RedisUtil redisUtil;
 
 	private static final List<String> WHITELIST_URLS = Arrays.asList(
-		"/api/reissue"
+		"/api/reissue", "/login"
 	);
 
 	@Override
