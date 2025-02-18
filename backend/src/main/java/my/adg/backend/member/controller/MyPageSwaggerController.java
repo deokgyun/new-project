@@ -4,8 +4,7 @@ import org.springframework.http.ResponseEntity;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import my.adg.backend.auth.resolver.AuthMember;
-import my.adg.backend.auth.resolver.LoginMember;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.member.dto.request.ProfileUpdateRequest;
 import my.adg.backend.member.dto.request.UpdatePasswordRequest;
 import my.adg.backend.member.dto.response.MemberFindResponse;

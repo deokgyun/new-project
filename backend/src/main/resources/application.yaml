@@ -53,8 +53,7 @@ security:
   jwt:
     token:
       secret-key: c2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQtc2lsdmVybmluZS10ZWNoLXNwcmluZy1ib290LWp3dC10dXRvcmlhbC1zZWNyZXQK
-#      expire-length: 900000
-      expire-length: 129600000
+      expire-length: 900_000
     refresh:
       secret-key: cqkwjnek1j2n3iqjwnbepWBEopiqhbweHBQEOhbqoe1bqwjenqwe129qBiBQIwhjbeoqebhgJSbdqiwbenvoadfbohbweohb12983quwbee182jbwlePhjbdfhuekBaHA
-      expire-length: 129600000
+      expire-length: 1_209_600_000

@@ -1,4 +1,4 @@
-package my.adg.backend.auth.resolver;
+package my.adg.backend.authentication.resolver;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;

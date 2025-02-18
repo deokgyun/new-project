@@ -1,7 +1,5 @@
 package my.adg.backend.order.controller;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -14,13 +12,13 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import my.adg.backend.auth.resolver.AuthMember;
-import my.adg.backend.auth.resolver.LoginMember;
-import my.adg.backend.global.dto.request.PageDataRequest;
+import my.adg.backend.authentication.resolver.AuthMember;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.order.dto.request.OrderRequest;
 import my.adg.backend.order.dto.response.OrderFindResponse;
 import my.adg.backend.order.dto.response.OrderItemsResponse;
@@ -44,15 +42,10 @@ public class OrderController implements OrderSwaggerController {
 
 	@GetMapping
 	public ResponseEntity<PagedModel<OrderFindResponse>> getAllOrders(
-		@RequestBody(required = false) Optional<PageDataRequest> request,
+		@RequestParam(value = "page", defaultValue = "0") int page,
 		@AuthMember LoginMember loginMember) {
 
-		int restPage = request
-			.map(PageDataRequest::page)
-			.map(page -> page.orElse(1) - 1)
-			.orElse(0);
-
-		Pageable pageable = PageRequest.of(restPage, PAGE_SIZE, Sort.by(Sort.Direction.DESC, SORT_ORDER_DATE));
+		Pageable pageable = PageRequest.of(page, PAGE_SIZE, Sort.by(Sort.Direction.DESC, SORT_ORDER_DATE));
 		Page<OrderFindResponse> orders = orderService.getAllOrders(loginMember, pageable);
 
 		return ResponseEntity.ok(new PagedModel<>(orders));

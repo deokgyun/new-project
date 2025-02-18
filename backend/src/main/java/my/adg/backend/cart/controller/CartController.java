@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import my.adg.backend.auth.resolver.AuthMember;
-import my.adg.backend.auth.resolver.LoginMember;
+import my.adg.backend.authentication.resolver.AuthMember;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.cart.dto.request.CreateUpdateCartProductRequest;
 import my.adg.backend.cart.dto.request.DeleteCartProductRequest;
 import my.adg.backend.cart.dto.response.CartResponse;

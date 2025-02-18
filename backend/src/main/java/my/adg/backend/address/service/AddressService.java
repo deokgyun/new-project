@@ -7,7 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import my.adg.backend.auth.resolver.LoginMember;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.address.domain.Address;
 import my.adg.backend.address.dto.request.CreateAndUpdateAddressRequest;
 import my.adg.backend.address.dto.response.AddressResponse;

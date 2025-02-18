@@ -14,8 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import my.adg.backend.auth.resolver.AuthMember;
-import my.adg.backend.auth.resolver.LoginMember;
+import my.adg.backend.authentication.resolver.AuthMember;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.address.dto.request.CreateAndUpdateAddressRequest;
 import my.adg.backend.address.dto.response.AddressResponse;
 import my.adg.backend.address.service.AddressService;

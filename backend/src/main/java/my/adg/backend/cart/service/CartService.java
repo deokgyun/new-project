@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import my.adg.backend.auth.resolver.LoginMember;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.cart.domain.Cart;
 import my.adg.backend.cart.dto.request.CreateUpdateCartProductRequest;
 import my.adg.backend.cart.dto.request.DeleteCartProductRequest;
