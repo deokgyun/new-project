@@ -46,6 +46,8 @@ public enum ErrorCode {
 	AUTHENTICATION_REQUIRED(UNAUTHORIZED, "인증이 필요합니다."),
 	EXPIRED_JWT_TOKEN(UNAUTHORIZED, "만료된 토큰 입니다."),
 	INVALID_JWT_TOKEN(UNAUTHORIZED, "유효하지 않은 토큰입니다"),
+	BLACKLIST_JWT_TOKEN(UNAUTHORIZED, "블랙리스트에 저장 된 토큰입니다."),
+	MISMATCHED_REFRESH_TOKEN(UNAUTHORIZED, "Refresh Token 값이 잘못 되었습니다.."),
 
 	// 403
 	FORBIDDEN_COMMENT_MODIFY(FORBIDDEN, "해당 댓글은 수정 권한이 없습니다."),

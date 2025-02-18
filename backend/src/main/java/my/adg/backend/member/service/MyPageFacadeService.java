@@ -3,7 +3,7 @@ package my.adg.backend.member.service;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-import my.adg.backend.auth.resolver.LoginMember;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.member.dto.request.ProfileUpdateRequest;
 import my.adg.backend.member.dto.request.UpdatePasswordRequest;
 import my.adg.backend.member.dto.response.MemberFindResponse;

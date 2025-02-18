@@ -1,4 +1,4 @@
-package my.adg.backend.auth.dto.request;
+package my.adg.backend.authentication.dto.request;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

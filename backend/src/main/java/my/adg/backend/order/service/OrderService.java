@@ -10,7 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import my.adg.backend.auth.resolver.LoginMember;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.global.exception.BalanceTalkException;
 import my.adg.backend.global.exception.ErrorCode;
 import my.adg.backend.member.domain.Member;

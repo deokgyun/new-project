@@ -36,9 +36,6 @@ public class ProductController implements ProductSwaggerController {
 	public ResponseEntity<PagedModel<ProductAllResponse>> getProducts(
 		@RequestParam(value = "page", defaultValue = "0") int page) {
 
-		log.info("page: {}", page);
-
-
 		Pageable pageable = PageRequest.of(page, PAGE_SIZE, Sort.by(Sort.Direction.DESC, SORT_ORDER_DATE));
 		Page<ProductAllResponse> products = productService.getProducts(pageable);
 

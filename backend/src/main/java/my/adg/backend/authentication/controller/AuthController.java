@@ -1,4 +1,4 @@
-package my.adg.backend.auth.controller;
+package my.adg.backend.authentication.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -8,10 +8,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import my.adg.backend.auth.dto.request.LoginRequest;
-import my.adg.backend.auth.dto.request.TokenReissueRequest;
-import my.adg.backend.auth.dto.response.LoginResponse;
-import my.adg.backend.auth.service.LoginService;
+import my.adg.backend.authentication.dto.request.LoginRequest;
+import my.adg.backend.authentication.dto.request.TokenReissueRequest;
+import my.adg.backend.authentication.dto.response.LoginResponse;
+import my.adg.backend.authentication.service.LoginService;
 import my.adg.backend.member.dto.request.MemberJoinRequest;
 import my.adg.backend.member.dto.response.MemberFindResponse;
 import my.adg.backend.member.service.MemberService;

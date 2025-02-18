@@ -1,4 +1,4 @@
-package my.adg.backend.auth.infrastructure;
+package my.adg.backend.authentication.infrastructure;
 
 import java.util.ArrayList;
 import java.util.Collection;

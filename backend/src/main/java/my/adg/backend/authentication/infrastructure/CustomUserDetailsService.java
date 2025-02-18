@@ -1,4 +1,4 @@
-package my.adg.backend.auth.infrastructure;
+package my.adg.backend.authentication.infrastructure;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import my.adg.backend.global.exception.BalanceTalkException;
+import my.adg.backend.global.exception.ErrorCode;
 import my.adg.backend.member.repository.MemberRepository;
 
 @Slf4j
@@ -18,16 +20,18 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		log.info("loadUserByUsername {}", username);
 
 		return memberRepository.findByEmail(username)
 			.map(CustomUserDetails::new)
-			.orElseThrow(() -> new UsernameNotFoundException(username));
+			.orElseThrow(() -> new BalanceTalkException(ErrorCode.NOT_FOUND_MEMBER));
 	}
 
 	public UserDetails loadUserById(Long id) throws UsernameNotFoundException {
+		log.info("loadUserByUsername {}", id);
 
 		return memberRepository.findById(id)
 			.map(CustomUserDetails::new)
-			.orElseThrow(() -> new UsernameNotFoundException(String.valueOf(id)));
+			.orElseThrow(() -> new BalanceTalkException(ErrorCode.NOT_FOUND_MEMBER));
 	}
 }

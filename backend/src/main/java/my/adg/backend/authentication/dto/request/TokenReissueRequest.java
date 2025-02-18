@@ -1,4 +1,4 @@
-package my.adg.backend.auth.dto.request;
+package my.adg.backend.authentication.dto.request;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.NotBlank;

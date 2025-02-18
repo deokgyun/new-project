@@ -3,8 +3,6 @@ package my.adg.backend.member.domain;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Embedded;
@@ -16,14 +14,12 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import my.adg.backend.auth.domain.HistoryLogin;
 import my.adg.backend.global.BaseEntity;
 import my.adg.backend.member.domain.enums.AccountStatus;
 import my.adg.backend.member.domain.enums.RoleType;
@@ -68,9 +64,6 @@ public class Member extends BaseEntity implements Serializable {
 	@OneToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "grade_id")
 	private Grade grade;
-
-	@OneToMany(mappedBy = "member")
-	private List<HistoryLogin> historyLogins = new ArrayList<>();
 
 	// password 업데이트
 	public void updatePassword(String encNewPassword) {

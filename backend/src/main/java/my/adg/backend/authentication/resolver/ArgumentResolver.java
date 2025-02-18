@@ -1,4 +1,4 @@
-package my.adg.backend.auth.resolver;
+package my.adg.backend.authentication.resolver;
 
 import org.springframework.core.MethodParameter;
 import org.springframework.security.core.Authentication;
@@ -10,9 +10,8 @@ import org.springframework.web.context.request.NativeWebRequest;
 import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 
-import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import my.adg.backend.auth.infrastructure.JwtTokenProvider;
+import my.adg.backend.authentication.infrastructure.JwtTokenProvider;
 import my.adg.backend.global.exception.BalanceTalkException;
 import my.adg.backend.global.exception.ErrorCode;
 

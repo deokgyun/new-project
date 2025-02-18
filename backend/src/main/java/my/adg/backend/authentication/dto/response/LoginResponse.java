@@ -1,4 +1,4 @@
-package my.adg.backend.auth.dto.response;
+package my.adg.backend.authentication.dto.response;
 
 import lombok.Builder;
 import my.adg.backend.member.domain.Member;

@@ -1,10 +1,10 @@
-package my.adg.backend.auth.controller;
+package my.adg.backend.authentication.controller;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import my.adg.backend.auth.dto.request.LoginRequest;
-import my.adg.backend.auth.dto.request.TokenReissueRequest;
-import my.adg.backend.auth.dto.response.LoginResponse;
+import my.adg.backend.authentication.dto.request.LoginRequest;
+import my.adg.backend.authentication.dto.request.TokenReissueRequest;
+import my.adg.backend.authentication.dto.response.LoginResponse;
 import my.adg.backend.member.dto.request.MemberJoinRequest;
 import my.adg.backend.member.dto.response.MemberFindResponse;
 

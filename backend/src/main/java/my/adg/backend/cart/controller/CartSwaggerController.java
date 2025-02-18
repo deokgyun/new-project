@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.http.ResponseEntity;
 
 import io.swagger.v3.oas.annotations.tags.Tag;
-import my.adg.backend.auth.resolver.LoginMember;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.cart.dto.request.CreateUpdateCartProductRequest;
 import my.adg.backend.cart.dto.request.DeleteCartProductRequest;
 import my.adg.backend.cart.dto.response.CartResponse;

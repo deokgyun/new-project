@@ -1,17 +1,11 @@
 package my.adg.backend.order.controller;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.web.PagedModel;
 import org.springframework.http.ResponseEntity;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import my.adg.backend.auth.resolver.LoginMember;
-import my.adg.backend.global.dto.request.PageDataRequest;
+import my.adg.backend.authentication.resolver.LoginMember;
 import my.adg.backend.order.dto.request.OrderRequest;
 import my.adg.backend.order.dto.response.OrderFindResponse;
 import my.adg.backend.order.dto.response.OrderItemsResponse;
@@ -29,7 +23,7 @@ public interface OrderSwaggerController {
 
 	// 전체 주문 조회
 	@Operation(summary = "전체 주문 조회하기")
-	ResponseEntity<PagedModel<OrderFindResponse>> getAllOrders(Optional<PageDataRequest> request, LoginMember loginMember);
+	ResponseEntity<PagedModel<OrderFindResponse>> getAllOrders(int page, LoginMember loginMember);
 
 	// 선택 주문 조회
 	@Operation(summary = "선택 주문 상세 조회하기")
